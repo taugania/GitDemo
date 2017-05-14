@@ -1,0 +1,22 @@
+SELECT  
+SD.Drive_Letter,
+SD.Server,
+SD.MBFree,
+SUM(CONVERT(decimal(12, 2), ROUND(Database_Info.Size / 128.000, 2)))
+AS Total_DB_Size,
+SD.MBFree - SUM(CONVERT(decimal(12, 2), ROUND(Database_Info.Size / 128.000, 2)))
+AS Available,
+SUM(CONVERT(decimal(12, 2), ROUND(Database_Info.Size / 128.000, 2)))
+/ ( SD.MBFree + SUM(CONVERT(decimal(12, 2), ROUND(Database_Info.Size / 128.000, 2))) ) * 100 
+AS Percentage,
+SD.MBFree + SUM(CONVERT(decimal(12, 2), ROUND(Database_Info.Size / 128.000, 2)))
+AS Free_Plus_Used
+
+FROM    
+SQL_Drives AS SD
+LEFT OUTER JOIN Database_Info ON SD.Server = Database_Info.Server
+AND SD.Drive_Letter = LEFT(Database_Info.Filename, 1)
+
+GROUP BY SD.Server,
+        SD.Drive_Letter,
+        SD.MBFree  

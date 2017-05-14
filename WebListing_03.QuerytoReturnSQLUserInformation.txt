@@ -1,0 +1,21 @@
+SELECT  SQL_DB_Users_Roles.Server,
+        SQL_DB_Users_Roles.DB_Name,
+        SQL_DB_Users_Roles.User_Name,
+        SQL_DB_Users_Roles.Group_Name AS User_Group,
+        SQL_DB_Users_Roles.Account_Type,
+        SQL_DB_Users_Roles.Login_Name,
+        SQL_DB_Users_Roles.Def_DB,
+        SQL_NT_Group_Members.Account_Name,
+        SQL_NT_Group_Members.type,
+        SQL_NT_Group_Members.Privilege,
+        SQL_NT_Group_Members.Mapped_Login_Name,
+        SQL_NT_Group_Members.Group_Name,
+        SQL_NT_Group_Members.Server AS Group_Server,
+        Server_Location.Location,
+        Server_Location.LocationID
+FROM    SQL_DB_Users_Roles
+        LEFT OUTER JOIN SQL_NT_Group_Members ON SQL_DB_Users_Roles.Server = SQL_NT_Group_Members.Server
+                                                AND SQL_DB_Users_Roles.Login_Name = SQL_NT_Group_Members.Group_Name
+                                                AND SQL_DB_Users_Roles.Account_Type = 'Windows Group'
+        LEFT OUTER JOIN SQL_Servers ON SQL_DB_Users_Roles.Server = SQL_Servers.Server
+        LEFT OUTER JOIN Server_Location ON SQL_Servers.LocationID = Server_Location.LocationID
