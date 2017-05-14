@@ -1,6 +1,9 @@
 -- This is a demo file.
 -- Number of databases not backed up within the past 36 hours
 -- Edited this file again.
+/*
+  You should really add some more comments in here.
+*/
 
 select COUNT(*) 
 from master.dbo.sysdatabases sbd
