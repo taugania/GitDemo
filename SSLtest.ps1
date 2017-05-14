@@ -21,6 +21,7 @@ $SqlConnection.Close()
 foreach ($row in $DataSet.Tables[0])
 {
 	$text = "ID:" + $row.col1.ToString() + " Inserted on: " + $row.DateInserted.ToString()
+	#Display the contents to the console screen.
 	Write-Host $text
 }
 
