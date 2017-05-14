@@ -15,6 +15,7 @@ $SqlAdapter = New-Object System.Data.SqlClient.SqlDataAdapter
 $SqlAdapter.SelectCommand = $SqlCmd
 $DataSet = New-Object System.Data.DataSet
 $SqlAdapter.Fill($DataSet)
+#Close the connection
 $SqlConnection.Close()
 
 foreach ($row in $DataSet.Tables[0])
