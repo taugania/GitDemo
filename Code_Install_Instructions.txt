@@ -1,0 +1,15 @@
+The schema for the DBA_Rep database has changed since the first article for the repository was published. Below are the instructions for loading a new database with the schema chanages required for the current article:
+
+1.) Open the Create_DBA_REP.sql file in SSMS from the code download and execute it. This will create the new DBA_REP database and all of its tables, including the ServerList_SSIS table, in which you will enter the SQl Servers on your network that you will be connecting to to collect information in the DBA_Rep repository database. 
+
+***** Note --If you already have a copy of the DBA_Rep database from a previous article, backup and save the database for your solution and then delete or rename the original DBA_Rep database.*****
+
+2.) Follow instructions on populating the ServerList_SSIS table. This will be the driving table that populates the variables in the SSIS package. As mentioned in the article you can either manually enter the data in the Serverlist_SSIS table or use SQlCMD -L to populate the table. You will need to perform additional data entry to set the new column values used, such as Connect, DMZ and LocationID. To associate the Location of the servers in your list you will also need to populate the Server_Location table.
+
+3.) Once the DBA_REP database is created and the ServerList_SSIS and Server_Location (optional) tables are is populated with valid server names and connectivity information (refer to current article for details on connectibility and DMZ values), load the DBA_Server_Load solution from the the code download into the Business Itelligence Development Studio (BIDS). Open the two connection strings in Connection Manager that use SQL Authentication (Multi_Server_DMZ and Multi_Server9_DMZ) and add in a valid server to the Server name property box along with a valid SQL account and password. This will be a one-time setting to save the sql account password. Subsequently the server will be dynamically populated using runtime variable read from the ServerList_SSIS table when the package executes. (The package data sources assume the DBA_Rep database in on the local instance of SQL Server)
+
+4.) If the package executes successfully, then you can proceed to loading the DBA_Server_Info solution, also in the code download and work with the three new reports detailed in the article. 
+
+***** Note in many installations, the SSRS report server will need to connect to the DBA_Rep on the instance where Report Server is running. If you have connectivity issues from the deployed report to the DBA_Rep database, this may be thr reason. ******
+
+----- Rodney Landrum -----

@@ -12,5 +12,5 @@ and not exists (
 select * from msdb.dbo.backupset bs
 where sbd.name = bs.database_name
 and bs.type = 'D'
---and bs.backup_finish_date >= DATEADD(hh,-36,getdate()))
-and bs.backup_finish_date >= DATEADD(hh,-24,getdate()))
+and bs.backup_finish_date >= DATEADD(HH,-36,getdate()))
+--and bs.backup_finish_date >= DATEADD(hh,-24,getdate()))

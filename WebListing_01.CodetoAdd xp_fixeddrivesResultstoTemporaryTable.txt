@@ -1,0 +1,28 @@
+SET NoCount ON   
+SET quoted_identifier OFF  
+  
+DECLARE @groupname VARCHAR(100)  
+
+IF EXISTS ( SELECT  *
+            FROM    tempdb.dbo.sysobjects
+            WHERE   id = OBJECT_ID(N'[tempdb].[dbo].[RESULT_STRING_FD]') ) 
+    DROP TABLE [tempdb].[dbo].[RESULT_STRING_FD] ; 
+
+CREATE TABLE [tempdb].[dbo].[RESULT_STRING_FD]
+    (
+      Drive_Letter CHAR(1),
+      MBFree int
+    )
+
+Insert  into [tempdb].[dbo].[RESULT_STRING_FD]
+        EXEC master..xp_fixeddrives
+
+Alter TABLE [tempdb].[dbo].[RESULT_STRING_FD]
+Add Server varchar(100) NULL ;
+
+GO
+
+Update  [tempdb].[dbo].[RESULT_STRING_FD]
+Set     Server = CONVERT(varchar(100), SERVERPROPERTY('Servername'))
+
+SET NoCount OFF
