@@ -5,9 +5,9 @@
   You should really add some more comments in here.
 */
 
-select COUNT(*) 
-from master.dbo.sysdatabases sbd
-where name not in ('master','model','msdb','tempdb','distribution')
+SELECT COUNT(*) 
+FROM master.dbo.sysdatabases sbd
+WHERE name NOT IN ('master','model','msdb','tempdb','distribution')
 and not exists (
 select * from msdb.dbo.backupset bs
 where sbd.name = bs.database_name
