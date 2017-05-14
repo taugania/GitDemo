@@ -9,6 +9,7 @@ $SqlConnection = New-Object System.Data.SqlClient.SqlConnection
 #$SqlConnection.ConnectionString = "Server=ABACUS\SQLEXPRESS;Database=test;Integrated Security=True;Application Name=SSL Test;Encrypt=TRUE"
 $SqlConnection.ConnectionString = "Server=ABACUS\SQLEXPRESS;Database=test;Integrated Security=True;Application Name=SSL Test"
 $SqlCmd = New-Object System.Data.SqlClient.SqlCommand
+#Define the select statement to execute.
 $SqlCmd.CommandText = "select * from Table1"
 $SqlCmd.Connection = $SqlConnection
 $SqlAdapter = New-Object System.Data.SqlClient.SqlDataAdapter
