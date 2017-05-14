@@ -1,3 +1,4 @@
+-- This is a demo file.
 -- Number of databases not backed up within the past 36 hours
 
 select COUNT(*) 
