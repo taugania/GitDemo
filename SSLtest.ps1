@@ -4,6 +4,7 @@
   Even though I know this is not proper PowerShell comment block.
 #>
 
+#Open a SQL Connection object
 $SqlConnection = New-Object System.Data.SqlClient.SqlConnection
 #$SqlConnection.ConnectionString = "Server=ABACUS\SQLEXPRESS;Database=test;Integrated Security=True;Application Name=SSL Test;Encrypt=TRUE"
 $SqlConnection.ConnectionString = "Server=ABACUS\SQLEXPRESS;Database=test;Integrated Security=True;Application Name=SSL Test"
